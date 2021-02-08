@@ -1,4 +1,4 @@
-module gitscm.cisco.com/royvargh/XSLTActivity
+module github.com/reallroy/flogo-xsltactivity
 
 go 1.13
 
