@@ -1,2 +1,2 @@
 # flogo-xsltactivity
-sadad
+Placeholder text for the XSLTActivity experiment
