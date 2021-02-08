@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "title": "Activity to handle XSLT",
   "description": "This activity handles the parsing of XML using XSLT",
-  "homepage": "https://gitscm.cisco.com/scm/~royvargh/xsltactivity.git",
+  "homepage": "https://github.com/reallyroy/flogo-xsltactivity.git",
   "settings": [
     {
       "name": "aSetting",
