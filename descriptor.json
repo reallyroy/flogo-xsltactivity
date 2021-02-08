@@ -1,0 +1,33 @@
+{
+  "name": "xsltactivity",
+  "type": "flogo:activity",
+  "version": "0.0.1",
+  "title": "Activity to handle XSLT",
+  "description": "This activity handles the parsing of XML using XSLT",
+  "homepage": "https://gitscm.cisco.com/scm/~royvargh/xsltactivity.git",
+  "settings": [
+    {
+      "name": "aSetting",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "input": [
+    {
+      "name": "xml",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "xslFile",
+      "type":"string",
+      "required": true
+    }
+  ],
+  "output": [
+    {
+      "name": "outputXml",
+      "type": "string"
+    }
+  ]
+}
