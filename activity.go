@@ -1,6 +1,9 @@
 package sample
 
 import (
+	"os"
+	"os/exec"
+
 	"github.com/project-flogo/core/activity"
 	"github.com/project-flogo/core/data/metadata"
 )
@@ -38,7 +41,6 @@ func (a *Activity) Metadata() *activity.Metadata {
 
 // Eval implements api.Activity.Eval - Logs the Message
 func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
-
 	input := &Input{}
 	err = ctx.GetInputObject(input)
 	if err != nil {
@@ -47,7 +49,18 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	ctx.Logger().Debugf("Input: %s", input.Xml)
 
-	output := &Output{OutputXml: input.Xml}
+	cmd := exec.Cmd{
+		Args: []string{"xsltproc", input.XslFile, input.Xml},
+		Env:  os.Environ(),
+		Path: "/usr/bin/xsltproc",
+	}
+
+	xmlString, cmdErr := cmd.Output()
+	if cmdErr != nil {
+		return false, cmdErr
+	}
+
+	output := &Output{OutputXml: string(xmlString)}
 	err = ctx.SetOutputObject(output)
 	if err != nil {
 		return true, err
