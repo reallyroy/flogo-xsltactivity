@@ -2,6 +2,7 @@ package xsltactivity
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 
@@ -49,10 +50,22 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	}
 	fmt.Println("Inside xsltactivity Eval")
 
-	ctx.Logger().Debugf("Input: %s", input.Xml)
+	// ctx.Logger().Debugf("Input: %s", input.Xml)
+	xml, xmlErr := ioutil.TempFile("", "xml")
+	if xmlErr != nil {
+		return false, xmlErr
+	}
+	defer os.Remove(xml.Name())
+
+	fmt.Println(xml.Name())
+
+	_, xmlWriteErr := xml.WriteString(input.Xml)
+	if xmlWriteErr != nil {
+		return false, xmlWriteErr
+	}
 
 	cmd := exec.Cmd{
-		Args: []string{"xsltproc", input.XslFile, input.Xml},
+		Args: []string{"xsltproc", input.XslFile, xml.Name()},
 		Env:  os.Environ(),
 		Path: "/usr/bin/xsltproc",
 	}
