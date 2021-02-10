@@ -49,20 +49,27 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 		return true, err
 	}
 	fmt.Println("Inside xsltactivity Eval")
+	fmt.Println("Going to create temp file")
 
 	// ctx.Logger().Debugf("Input: %s", input.Xml)
 	xml, xmlErr := ioutil.TempFile("", "xml")
 	if xmlErr != nil {
+		fmt.Println("Going to create temp file - Error: ", xmlErr)
 		return false, xmlErr
 	}
 	defer os.Remove(xml.Name())
 
 	fmt.Println(xml.Name())
 
+	fmt.Println("Temp file created, going to write")
+
 	_, xmlWriteErr := xml.WriteString(input.Xml)
 	if xmlWriteErr != nil {
+		fmt.Println("Temp file created, going to write - Error: ", xmlWriteErr)
 		return false, xmlWriteErr
 	}
+
+	fmt.Println("String written, lets execute")
 
 	cmd := exec.Cmd{
 		Args: []string{"xsltproc", input.XslFile, xml.Name()},
@@ -72,6 +79,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	xmlString, cmdErr := cmd.Output()
 	if cmdErr != nil {
+		fmt.Println("Error running CMD: ", cmdErr)
 		return false, cmdErr
 	}
 
