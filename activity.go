@@ -1,6 +1,7 @@
 package xsltactivity
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 
@@ -46,6 +47,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
+	fmt.Println("Inside xsltactivity Eval")
 
 	ctx.Logger().Debugf("Input: %s", input.Xml)
 
@@ -59,6 +61,8 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if cmdErr != nil {
 		return false, cmdErr
 	}
+
+	// xmlString := "Boo!"
 
 	output := &Output{OutputXml: string(xmlString)}
 	err = ctx.SetOutputObject(output)
