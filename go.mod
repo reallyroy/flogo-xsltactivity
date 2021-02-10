@@ -1,4 +1,4 @@
-module github.com/reallyroy/flogo-xsltactivity
+module github.com/reallyroy/xsltactivity
 
 go 1.13
 
