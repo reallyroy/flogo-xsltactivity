@@ -48,7 +48,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
-	fmt.Println("Inside xsltactivity Eval")
+	// fmt.Println("Inside xsltactivity Eval")
 	fmt.Println("Going to create temp file")
 
 	// ctx.Logger().Debugf("Input: %s", input.Xml)
