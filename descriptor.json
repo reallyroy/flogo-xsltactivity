@@ -1,10 +1,10 @@
 {
   "name": "xsltactivity",
   "type": "flogo:activity",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "title": "Activity to handle XSLT",
   "description": "This activity handles the parsing of XML using XSLT",
-  "homepage": "https://github.com/reallyroy/flogo-xsltactivity.git",
+  "homepage": "https://github.com/reallyroy/xsltactivity.git",
   "settings": [
     {
       "name": "aSetting",

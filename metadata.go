@@ -12,14 +12,17 @@ type Input struct {
 }
 
 func (r *Input) FromMap(values map[string]interface{}) error {
-	strVal, _ := coerce.ToString(values["xml"])
-	r.Xml = strVal
+	xmlVal, _ := coerce.ToString(values["xml"])
+	r.Xml = xmlVal
+	xslVal, _ := coerce.ToString(values["xslFile"])
+	r.XslFile = xslVal
 	return nil
 }
 
 func (r *Input) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"xml": r.Xml,
+		"xml":     r.Xml,
+		"xslFile": r.XslFile,
 	}
 }
 
